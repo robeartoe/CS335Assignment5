@@ -16,8 +16,6 @@ struct queueNode
 };
 
 // 1: Insert data in array months to a BST:
-
-
 struct treeNode *newNode(string month){
     struct treeNode *temp =  (struct treeNode *)malloc(sizeof(struct treeNode));
     temp->name = month;
@@ -58,12 +56,6 @@ int displayHeight(struct treeNode* t){
     if (t == NULL) return -1;
     else return 1 + max(displayHeight(t->left),displayHeight(t->right));
 }
-
-// // 5: Find and display the height of the left and right subtrees.
-// std::pair<int,int> displaySubHeight(struct treeNode* t){
-//   if (t == NULL) return -1;
-//   else return 1
-// }
 
 // 6: Count and Display the number of nodes in the left and right subtrees:
 // 7: Display the descendants of Mar:
