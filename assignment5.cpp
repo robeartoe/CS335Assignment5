@@ -15,6 +15,7 @@ struct queueNode
     queueNode *next;
 };
 
+
 // 1: Insert data in array months to a BST:
 struct treeNode *newNode(string month){
     struct treeNode *temp =  (struct treeNode *)malloc(sizeof(struct treeNode));
@@ -59,13 +60,45 @@ int displayHeight(struct treeNode* t){
 
 // 6: Count and Display the number of nodes in the left and right subtrees:
 // 7: Display the descendants of Mar:
+
 // 8: Display the ancestors of Sep:
 // 9: Make the mirror image of this tree and display it.
+struct treeNode *makeMirror(struct treeNode* m,struct treeNode* t){
+    if (m == NULL) {
+        return newNode(t->name);
+    }
+        m->left  = makeMirror(m->left, t->right);
+        m->right = makeMirror(m->right, t->left);
+    return t;
+}
+
+
 // 10: Visit the original tree and the mirror tree level by level (data at each level must be reverse of each other) display the result of each visitations.
+void displayTreesAllLevels(struct treeNode* t, struct treeNode* m)
+{
+    int h = displayHeight(t);
+    for (int i = 1; i<=h; i ++)
+    displayTreesAtLevel(t, m, i);
+
+}
+void displayTreesAtLevel(struct treeNode* t, struct treeNode* m, int level)
+{
+     if (t == NULL) return;
+     if (level == 1)
+     {
+         std::cout<< t->name << " " << m->name;
+     }
+     else if(level>1)
+     {
+        displayTreesAtLevel(t->left, m->right, level-1);
+        displayTreesAtLevel(t->right, m->left, level-1);
+    }
+}
 
 
 int main() {
     struct treeNode *t = NULL;
+    struct treeNode *m = NULL;
     string months[12]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};
 
     // 1:
@@ -99,5 +132,8 @@ int main() {
 
     //TODO: 6-10:
 
+
+    //9:
+    m = makeMirror(m,t);
     return 0;
 }
